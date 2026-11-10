@@ -59,8 +59,8 @@ def create_report(input_path, output_path):
                 raise ValueError(f'Row {row_number}: Region must be nonempty text')
             values[2] = ' '.join(region.split()).title()
             units = number(values[4], row_number, 'Units')
-            if units <= 0:
-                raise ValueError(f'Row {row_number}: Units must be greater than zero, got {values[4]!r}')
+            if units < 0:
+                raise ValueError(f'Row {row_number}: Units must be nonnegative, got {values[4]!r}')
             price = number(values[5], row_number, 'Unit Price')
             revenue = units * price
             values[4:6] = [units, price]
